@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "type": "module-28-archive",
+  "exportedAt": "2026-10-12T11:01:36.468Z",
+  "archive": [
+    {
+      "name": "Zestawienie 12.10.2026",
+      "createdAt": "2026-10-12T11:01:27.134Z",
+      "data": {
+        "stock": [
+          {
+            "position": "01",
+            "name": "JOQ Pink",
+            "type": "Kartonik",
+            "quantity": 24576
+          },
+          {
+            "position": "02",
+            "name": "JOQ Pink",
+            "type": "Cover",
+            "quantity": 18245
+          },
+          {
+            "position": "03",
+            "name": "JOQ Pink",
+            "type": "Filter",
+            "quantity": 9456
+          }
+        ],
+        "order": [
+          {
+            "position": "01",
+            "name": "JOQ Pink",
+            "type": "Kartonik",
+            "quantity": 24960
+          },
+          {
+            "position": "02",
+            "name": "JOQ Pink",
+            "type": "Cover",
+            "quantity": 24960
+          },
+          {
+            "position": "03",
+            "name": "JOQ Pink",
+            "type": "Filter",
+            "quantity": 24960
+          }
+        ],
+        "executors": {
+          "01|joq pink|kartonik": "Ceris",
+          "02|joq pink|cover": "Ceris",
+          "03|joq pink|filter": "Ceris"
+        },
+        "archive": []
+      }
+    }
+  ]
+}

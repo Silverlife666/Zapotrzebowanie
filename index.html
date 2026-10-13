@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moduł 28 · Inwentaryzacja zamówienia</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="page-header">
+        <div>
+          <p class="eyebrow">MODUŁ 28</p>
+          <h1>Inwentaryzacja i przygotowanie zamówienia</h1>
+          <p class="intro">Wprowadź stan po poprzednim zamówieniu/produkcji oraz bieżące zamówienie klienta. Lista braków utworzy się automatycznie.</p>
+        </div>
+        <div class="header-actions">
+          <button class="secondary" id="demo-button" type="button">Wczytaj przykład</button>
+          <button class="secondary" id="archive-button" type="button">Zapisz do archiwum</button>
+          <button class="secondary" id="export-button" type="button">Eksportuj archiwum</button>
+          <button class="secondary" id="import-button" type="button">Importuj kopię</button>
+          <button class="primary" id="pdf-button" type="button">Generuj PDF</button>
+          <button class="danger" id="reset-button" type="button">Wyczyść dane</button>
+          <input id="import-file" type="file" accept="application/json,.json" hidden />
+        </div>
+      </header>
+
+      <section class="notice" aria-label="Sposób obliczania">
+        <span aria-hidden="true">i</span>
+        <p><strong>Ilość do zamówienia</strong> = maksymalnie <strong>0</strong> lub <strong>ilość w zamówieniu − ilość na stanie</strong>. Nadwyżka pozostaje widoczna w kolumnie „Różnica”.</p>
+      </section>
+
+      <section class="input-grid" aria-label="Dane wejściowe">
+        <article class="card">
+          <div class="card-heading">
+            <div><p class="table-number">TABELA 1</p><h2>Stan magazynowy / po produkcji</h2></div>
+            <button class="add-button" data-add="stock" type="button">+ Dodaj pozycję</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Pozycja</th><th>Nazwa</th><th>Rodzaj towaru</th><th>Ilość</th><th aria-label="Usuń"></th></tr></thead>
+              <tbody id="stock-body"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-heading">
+            <div><p class="table-number">TABELA 2</p><h2>Zamówienie od klienta</h2></div>
+            <button class="add-button" data-add="order" type="button">+ Dodaj pozycję</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Pozycja</th><th>Nazwa</th><th>Rodzaj towaru</th><th>Ilość</th><th aria-label="Usuń"></th></tr></thead>
+              <tbody id="order-body"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section class="results card" aria-labelledby="summary-title">
+        <div class="card-heading summary-heading">
+          <div><p class="table-number">TABELA 3</p><h2 id="summary-title">Zestawienie do realizacji</h2></div>
+          <div class="summary-stats" aria-live="polite">
+            <span>Pozycje z brakiem <b id="shortage-count">0</b></span>
+            <span>Łącznie do zamówienia <b id="shortage-total">0</b></span>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="summary-table">
+            <thead><tr><th>Pozycja</th><th>Nazwa</th><th>Rodzaj towaru</th><th>Ilość na stanie</th><th>Ilość w zamówieniu</th><th>Ilość do zamówienia</th><th>Różnica</th><th>Wykonawca asortymentu</th></tr></thead>
+            <tbody id="summary-body"></tbody>
+          </table>
+        </div>
+        <p class="empty-state" id="empty-state">Dodaj pozycje w tabeli stanu lub zamówienia, aby zobaczyć zestawienie.</p>
+      </section>
+      <section class="archive card" aria-labelledby="archive-title">
+        <div class="card-heading">
+          <div><p class="table-number">ARCHIWUM</p><h2 id="archive-title">Zapisane zestawienia</h2></div>
+          <span class="archive-note">Archiwum jest przechowywane lokalnie na tym urządzeniu.</span>
+        </div>
+        <div id="archive-list" class="archive-list"></div>
+        <p class="empty-state" id="archive-empty">Nie zapisano jeszcze żadnego zestawienia.</p>
+      </section>
+    </main>
+    <template id="input-row-template">
+      <tr>
+        <td><input data-field="position" aria-label="Pozycja" placeholder="np. 01" /></td>
+        <td><input data-field="name" aria-label="Nazwa" placeholder="Nazwa asortymentu" /></td>
+        <td><input data-field="type" aria-label="Rodzaj towaru" placeholder="np. produkt gotowy" /></td>
+        <td><input data-field="quantity" aria-label="Ilość" type="number" min="0" step="1" value="0" /></td>
+        <td><button class="delete-button" type="button" aria-label="Usuń pozycję">×</button></td>
+      </tr>
+    </template>
+    <script src="app.js"></script>
+  </body>
+</html>
